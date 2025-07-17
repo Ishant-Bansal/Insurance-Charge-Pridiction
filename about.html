@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - MediQuote AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
+            background-color: #e6f2fa;
+            color: #333;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 20px 40px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+        }
+        .logo h1 {
+            font-size: 22px;
+            color: #007BBD;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #007BBD;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #0a3d62;
+        }
+        .about-section {
+            max-width: 800px;
+            margin: 48px auto 0 auto;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            padding: 48px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: #0a3d62;
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .about-icon {
+            color: #007BBD;
+            font-size: 3rem;
+            margin-bottom: 18px;
+            display: block;
+            text-align: center;
+        }
+        p, ul {
+            font-size: 1.15rem;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+        ul {
+            margin-top: 10px;
+            margin-bottom: 18px;
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .team {
+            margin-top: 32px;
+            background: #f6fbff;
+            border-radius: 18px;
+            padding: 24px 18px;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.07);
+            width: 100%;
+        }
+        .team h2 {
+            font-size: 1.25rem;
+            color: #007BBD;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .team ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .back-home-btn {
+            margin: 0 0 32px 0;
+            background: #007BBD;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.10);
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-home-btn:hover {
+            background: #0a3d62;
+            transform: translateY(-2px);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 1px solid #ccc;
+            font-size: 14px;
+            color: #555;
+            margin-top: 40px;
+        }
+        @media (max-width: 900px) {
+            .about-section {
+                padding: 32px 10px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .about-icon {
+                font-size: 2.2rem;
+            }
+            p, ul {
+                font-size: 1.02rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .about-section {
+                padding: 18px 2px;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            .about-icon {
+                font-size: 1.5rem;
+            }
+            p, ul {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+            <img src="/static/images/logo.png" alt="MediQuote Logo" style="height: 40px;" />
+            <h1 style="font-size: 20px; color: #007BBD; margin: 0;">MediQuote AI</h1>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/project">Project</a>
+            <a href="/history">History</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+    <section class="about-section">
+        <a href="/" class="back-home-btn">Back to Home</a>
+        <span class="about-icon">&#128737;</span>
+        <h1>About MediQuote AI</h1>
+        <p>
+            This project is designed to help users estimate their health insurance charges based on key personal and lifestyle factors. Using machine learning, we analyze historical insurance data to predict costs, making it easier for individuals to plan and understand their insurance needs.
+        </p>
+        <ul>
+            <li><strong>Input Factors:</strong> Age, Sex, BMI, Number of Children, Smoker Status</li>
+            <li><strong>Output:</strong> Predicted insurance charges</li>
+            <li><strong>Technology:</strong> Python, Flask, HTML/CSS, Machine Learning (Regression)</li>
+        </ul>
+        <p>
+            The model is trained on a real-world dataset and provides instant predictions. Our goal is to make insurance cost estimation transparent and accessible for everyone.
+        </p>
+        <div class="team">
+            <h2>Project Team</h2>
+            <ul>
+                <li>Ishant Bansal</li>
+                <li>Upflair Data Science Team</li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 MediQuote AI | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

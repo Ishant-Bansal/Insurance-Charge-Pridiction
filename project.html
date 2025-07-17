@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediQuote AI – Predict Insurance Charges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(120deg, #5b9df9 0%, #c86dd7 100%);
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 20px 40px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+      width: 100%;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo h1 {
+      font-size: 22px;
+      color: #007BBD;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 18px;
+      font-size: 1.13rem;
+      font-weight: 600;
+    }
+    nav a {
+      text-decoration: none;
+      color: #007BBD;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #0a3d62;
+    }
+    .main-card {
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: 0 8px 40px rgba(44,62,80,0.13);
+      max-width: 1000px;
+      width: 100%;
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+      margin: 120px auto 32px auto;
+      min-height: 540px;
+    }
+    .form-section {
+      flex: 1 1 50%;
+      padding: 48px 36px 36px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .form-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #22325c;
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+    }
+    .form-label {
+      font-size: 1.1rem;
+      color: #22325c;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .form-input, .form-select {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 2px solid #e0e6ed;
+      background: #f4f8fb;
+      font-size: 1rem;
+      color: #22325c;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .form-input:focus, .form-select:focus {
+      border: 2px solid #5b9df9;
+    }
+    .form-row {
+      display: flex;
+      gap: 18px;
+    }
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    /* Custom Radio Buttons */
+    .custom-radio-group {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      margin-top: 4px;
+    }
+    .custom-radio-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.08rem;
+      color: #22325c;
+      cursor: pointer;
+      font-weight: 500;
+      user-select: none;
+    }
+    .custom-radio {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 26px;
+      height: 26px;
+      border: 2.5px solid #2563eb;
+      border-radius: 50%;
+      background: #f4f8fb;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+      margin: 0;
+    }
+    .custom-radio:checked {
+      border: 7px solid #2563eb;
+      background: #fff;
+    }
+    .custom-radio:focus {
+      box-shadow: 0 0 0 3px #b3d1ff;
+    }
+    .custom-radio-label .custom-radio {
+      margin-right: 8px;
+    }
+    .predict-btn {
+      margin: 28px auto 0 auto;
+      display: block;
+      background: #2563eb;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 48px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.10);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .predict-btn:hover {
+      background: #174ea6;
+      transform: translateY(-2px);
+    }
+    /* Right Section */
+    .visual-section {
+      flex: 1 1 50%;
+      background: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 32px 32px 32px;
+      min-width: 320px;
+    }
+    .visual-section img.doctor-img {
+      width: 440px;
+      max-width: 90vw;
+      margin-bottom: 32px;
+      display: block;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .mini-icons-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 12px;
+    }
+    .mini-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .mini-icon img {
+      width: 112px;
+      height: 112px;
+      background: #f4f8fb;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,123,189,0.07);
+      padding: 8px;
+      margin-bottom: 2px;
+    }
+    .mini-icon span {
+      font-size: 1rem;
+      color: #22325c;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    /* Custom Image Upload */
+    .image-upload-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #e6f2fa;
+      color: #007BBD;
+      border: 2px dashed #007BBD;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 18px 0 0 0;
+      transition: background 0.2s, border 0.2s;
+      width: fit-content;
+    }
+    .image-upload-label:hover {
+      background: #d0e7fa;
+      border-color: #2563eb;
+    }
+    .image-upload-label svg {
+      width: 28px;
+      height: 28px;
+      fill: #007BBD;
+    }
+    #profile_image_input {
+      display: none;
+    }
+    .image-preview {
+      margin: 18px 0 0 0;
+      text-align: center;
+    }
+    .image-preview img {
+      max-width: 160px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #007BBD22;
+      margin-top: 6px;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .main-card {
+        flex-direction: column;
+        min-height: unset;
+        padding: 0;
+      }
+      .form-section, .visual-section {
+        padding: 32px 18px;
+      }
+      .visual-section {
+        min-width: 0;
+      }
+      .visual-section img.doctor-img {
+        width: 220px;
+      }
+      .mini-icon img {
+        width: 56px;
+        height: 56px;
+      }
+    }
+    @media (max-width: 600px) {
+      .main-card {
+        margin: 12px 2vw;
+      }
+      .form-section, .visual-section {
+        padding: 18px 4vw;
+      }
+      .mini-icons-row {
+        gap: 16px;
+      }
+      .visual-section img.doctor-img {
+        width: 120px;
+      }
+      .mini-icon img {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+      <div class="logo">
+          <img src="/static/images/logo.png" alt="MediQuote Logo" style="height: 40px;" />
+          <h1>MediQuote AI</h1>
+      </div>
+      <nav>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/project">Project</a>
+          <a href="/history">History</a>
+          <a href="/contact">Contact</a>
+      </nav>
+  </header>
+  <div class="main-card">
+    <div class="form-section">
+      <div class="form-title">Insurance Charge Prediction</div>
+      {% if prediction is defined %}
+      <div style="background: #e6f2fa; border-left: 6px solid #007BBD; border-radius: 12px; padding: 18px 22px; margin-bottom: 28px; font-size: 1.25rem; color: #0a3d62; font-weight: 700; box-shadow: 0 2px 8px rgba(37,99,235,0.07);">
+        Predicted Insurance Charge: <span style="color: #2563eb;">₹{{ prediction }}</span>
+      </div>
+      {% endif %}
+      <form action="/project" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="age" class="form-label">Age:</label>
+          <input type="number" id="age" name="age" min="1" max="100" required class="form-input">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bmi" class="form-label">BMI:</label>
+            <input type="number" id="bmi" name="bmi" step="0.01" required class="form-input">
+          </div>
+          <div class="form-group">
+            <label for="children" class="form-label">Children:</label>
+            <select id="children" name="children" class="form-select">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sex:</label>
+          <div class="custom-radio-group">
+            <label class="custom-radio-label">
+              <input type="radio" name="sex" value="male" required class="custom-radio">
+              Male
+            </label>
+            <label class="custom-radio-label">
+              <input type="radio" name="sex" value="female" class="custom-radio">
+              Female
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Smoker:</label>
+          <div class="custom-radio-group">
+            <label class="custom-radio-label">
+              <input type="radio" name="smoker" value="yes" required class="custom-radio">
+              Yes
+            </label>
+            <label class="custom-radio-label">
+              <input type="radio" name="smoker" value="no" class="custom-radio">
+              No
+            </label>
+          </div>
+        </div>
+        <label for="profile_image_input" class="image-upload-label">
+          <svg viewBox="0 0 24 24"><path d="M12 16.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5zm6.5-10h-2.14l-.72-1.45C15.26 4.4 14.67 4 14 4h-4c-.67 0-1.26.4-1.64 1.05L7.64 6.5H5.5C4.12 6.5 3 7.62 3 9v10c0 1.38 1.12 2.5 2.5 2.5h13c1.38 0 2.5-1.12 2.5-2.5V9c0-1.38-1.12-2.5-2.5-2.5zm-6.5 11c-2.48 0-4.5-2.02-4.5-4.5s2.02-4.5 4.5-4.5 4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5z"/></svg>
+          Upload Profile Image
+        </label>
+        <input type="file" id="profile_image_input" name="profile_image" accept="image/*" onchange="showImagePreview(event)">
+        <div class="image-preview" id="imagePreviewContainer"></div>
+        <button type="submit" class="predict-btn">Predict</button>
+      </form>
+      {% if image_url %}
+          <div style="margin: 20px 0; text-align:center;">
+              <img src="{{ image_url }}" alt="Uploaded Image" style="max-width:200px; border-radius:12px; box-shadow:0 2px 8px #007BBD22;" />
+          </div>
+      {% endif %}
+    </div>
+    <div class="visual-section">
+      <img src="/static/images/Doctor Lady.png" alt="Doctor" class="doctor-img">
+      <div class="mini-icons-row">
+        <div class="mini-icon">
+          <img src="/static/images/Health icon.png" alt="Health" />
+          <span>Health</span>
+        </div>
+        <div class="mini-icon">
+          <img src="/static/images/Medical Record icon.png" alt="Medical Record" />
+          <span>Medical Record</span>
+        </div>
+        <div class="mini-icon">
+          <img src="/static/images/Demographics icon.png" alt="Demographics" />
+          <span>Demographics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+function showImagePreview(event) {
+  const container = document.getElementById('imagePreviewContainer');
+  container.innerHTML = '';
+  const file = event.target.files[0];
+  if (file) {
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.onload = () => URL.revokeObjectURL(img.src);
+    container.appendChild(img);
+  }
+}
+</script>
+</body>
+</html>

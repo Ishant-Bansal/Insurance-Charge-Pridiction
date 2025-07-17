@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediQuote AI – Predict Insurance Charges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    /* RESET & FONTS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #e6f2fa;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 20px 40px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+    }
+
+    .logo h1 {
+      font-size: 22px;
+      color: #007BBD;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #007BBD;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #0a3d62;
+    }
+
+    /* MAIN SECTION */
+    .main-section {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      padding: 48px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-panel img {
+      width: 260px;
+      height: auto;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .center-panel {
+      flex: 1 1 320px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .center-panel h2 {
+      font-size: 2.4rem;
+      color: #0a3d62;
+      font-weight: 800;
+    }
+
+    .center-panel p {
+      font-size: 1.1rem;
+    }
+
+    .predict-btn {
+      padding: 14px 38px;
+      background-color: #007BBD;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.10);
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .predict-btn:hover {
+      background: #0a3d62;
+      transform: translateY(-2px);
+    }
+
+    .right-panel {
+      flex: 1 1 320px;
+      text-align: center;
+    }
+
+    .card-image {
+      width: 320px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,123,189,0.10);
+    }
+
+    .icons-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .icon {
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
+    }
+
+    .icon img {
+      width: 70px;
+      height: 70px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,123,189,0.07);
+      padding: 10px;
+    }
+
+    .icon p {
+      font-size: 1rem;
+      color: #007BBD;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* INFO CARDS */
+    .info-cards-section {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 48px auto 0 auto;
+      max-width: 1100px;
+      flex-wrap: wrap;
+    }
+
+    .info-card {
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 4px 18px rgba(0,123,189,0.10);
+      display: flex;
+      align-items: center;
+      padding: 24px 28px;
+      flex: 1 1 280px;
+      gap: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 28px rgba(0,123,189,0.18);
+    }
+
+    .info-card img {
+      width: 64px;
+      height: 64px;
+      background: #e6f2fa;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .info-card-content h3 {
+      font-size: 1.15rem;
+      color: #007BBD;
+      font-weight: 700;
+    }
+
+    .info-card-content p {
+      font-size: 0.98rem;
+      color: #333;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffffff;
+      border-top: 1px solid #ccc;
+      font-size: 14px;
+      color: #555;
+      margin-top: 40px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .main-section {
+        flex-direction: column;
+        padding: 32px 10px;
+      }
+
+      .center-panel {
+        text-align: center;
+        align-items: center;
+      }
+
+      .info-cards-section {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .info-card {
+        max-width: 90vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+          <img src="/static/images/logo.png" alt="MediQuote Logo" style="height: 40px;" />
+          <h1 style="font-size: 20px; color: #007BBD; margin: 0;">MediQuote AI</h1>
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/history">History</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </header>
+
+  <section class="main-section" data-aos="fade-up">
+    <div class="left-panel" data-aos="zoom-in">
+      <img src="/static/images/Doctor Lady.png" alt="Doctor">
+    </div>
+    <div class="center-panel" data-aos="fade-right">
+      <h2>Insurance Charge Prediction</h2>
+      <p>Predict insurance charges based on health data</p>
+      <a href="/project" class="predict-btn">Predict</a>
+    </div>
+    <div class="right-panel" data-aos="fade-left">
+      <a href="/generate_card">
+        <img src="/static/images/Health Insurance Card.png" alt="Health Insurance Card" class="card-image" style="cursor:pointer;" />
+      </a>
+      <div class="icons-row">
+        <div class="icon">
+          <img src="/static/images/Health icon.png" alt="Health" />
+          <p>Health</p>
+        </div>
+        <div class="icon">
+          <img src="/static/images/Medical Record icon.png" alt="Medical Record" />
+          <p>Medical Record</p>
+        </div>
+        <div class="icon">
+          <img src="/static/images/Demographics icon.png" alt="Demographics" />
+          <p>Demographics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-cards-section" data-aos="fade-up">
+    <div class="info-card">
+      <div class="info-card-content">
+        <h3>Comprehensive Health Data</h3>
+        <p>Our system analyzes a wide range of health metrics to provide accurate insurance charge predictions tailored to your profile.</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-content">
+        <h3>Secure Medical Records</h3>
+        <p>Your medical records are handled with utmost security and privacy, ensuring your data is always protected.</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-content">
+        <h3>Personalized Demographics</h3>
+        <p>We consider your unique demographic information to deliver personalized and fair insurance charge estimates.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MediQuote AI | All Rights Reserved</p>
+  </footer>
+  
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 1000 });</script>
+
+</body>
+</html>

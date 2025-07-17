@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - MediQuote AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
+            background-color: #e6f2fa;
+            color: #333;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 20px 40px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+        }
+        .logo h1 {
+            font-size: 22px;
+            color: #007BBD;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #007BBD;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #0a3d62;
+        }
+        .contact-section {
+            max-width: 500px;
+            margin: 48px auto 0 auto;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            padding: 48px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            font-size: 2.2rem;
+            color: #0a3d62;
+            font-weight: 800;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            width: 100%;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #007BBD;
+            font-size: 1.08rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 14px;
+            border: 1.5px solid #cbe5fa;
+            font-size: 1.08rem;
+            background: #f6fbff;
+            color: #333;
+            margin-bottom: 2px;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #007BBD;
+            box-shadow: 0 0 0 2px #b3e0ff;
+            background: #fff;
+        }
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        button {
+            width: 100%;
+            padding: 14px 0;
+            border-radius: 30px;
+            border: none;
+            background: #007BBD;
+            color: white;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.10);
+            transition: background 0.3s, transform 0.2s;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background: #0a3d62;
+            transform: translateY(-2px);
+        }
+        .back-home-btn {
+            margin: 0 0 32px 0;
+            background: #007BBD;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.10);
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-home-btn:hover {
+            background: #0a3d62;
+            transform: translateY(-2px);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 1px solid #ccc;
+            font-size: 14px;
+            color: #555;
+            margin-top: 40px;
+        }
+        @media (max-width: 900px) {
+            .contact-section {
+                padding: 32px 10px;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            input, textarea {
+                padding: 10px 6px;
+                font-size: 0.98rem;
+            }
+            button {
+                padding: 12px 0;
+                font-size: 1.05rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .contact-section {
+                padding: 18px 2px;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            input, textarea {
+                font-size: 0.92rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+            <img src="/static/images/logo.png" alt="MediQuote Logo" style="height: 40px;" />
+            <h1 style="font-size: 20px; color: #007BBD; margin: 0;">MediQuote AI</h1>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/project">Project</a>
+            <a href="/history">History</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+    <section class="contact-section">
+        <a href="/" class="back-home-btn">Back to Home</a>
+        <h2>Contact Us</h2>
+        <form method="POST" action="/contact">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2025 MediQuote AI | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

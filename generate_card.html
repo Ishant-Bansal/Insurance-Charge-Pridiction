@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Insurance Cards - MediQuote AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #e6f2fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            font-family: 'Roboto', sans-serif;
+        }
+        .cards-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: center;
+            margin: 40px 0 24px 0;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .card-container {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 123, 189, 0.13);
+            padding: 40px 32px;
+            max-width: 340px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card-title {
+            color: #007BBD;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+        .card-details {
+            text-align: left;
+            margin: 0 auto 18px auto;
+            font-size: 1.1rem;
+        }
+        .card-details span {
+            font-weight: 700;
+            color: #0a3d62;
+        }
+        .charges {
+            font-size: 1.3rem;
+            color: #0a3d62;
+            font-weight: 700;
+            margin: 18px 0 10px 0;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.98rem;
+            margin-bottom: 18px;
+        }
+        .back-btn {
+            background: #007BBD;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.10);
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 32px auto 0 auto;
+        }
+        .back-btn:hover {
+            background: #0a3d62;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 900px) {
+            .cards-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cards-wrapper">
+        {% if entries and entries|length > 0 %}
+            {% for entry in entries %}
+                <div class="card-container">
+                    {% if entry.image_url %}
+                        <img src="{{ entry.image_url }}" alt="Profile Image" style="max-width:120px; border-radius:50%; margin-bottom:18px; box-shadow:0 2px 8px #007BBD22;" />
+                    {% endif %}
+                    <div class="card-title">Your Insurance Card</div>
+                    <div class="card-details">
+                        <div><span>Age:</span> {{ entry.age }}</div>
+                        <div><span>Sex:</span> {{ entry.sex }}</div>
+                        <div><span>BMI:</span> {{ entry.BMI }}</div>
+                        <div><span>Children:</span> {{ entry.children }}</div>
+                        <div><span>Smoker:</span> {{ entry.smoker }}</div>
+                    </div>
+                    <div class="charges">Predicted Charges: ${{ entry.prediction }}</div>
+                    <div class="timestamp">Generated: {{ entry.timestamp }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="card-container">
+                <div class="card-title">No Data Found</div>
+                <p>No insurance prediction data available. Please make a prediction first.</p>
+            </div>
+        {% endif %}
+    </div>
+    <a href="/" class="back-btn">Back to Home</a>
+</body>
+</html> 
